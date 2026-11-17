@@ -1,0 +1,23 @@
+{% extends 'events/base.html' %}
+
+{% block title %}Добавить мероприятие{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Добавить новое мероприятие</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: #dc3545; font-size: 13px;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn">Сохранить</button>
+        <a href="{% url 'event_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}

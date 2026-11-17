@@ -1,0 +1,27 @@
+{% extends 'events/base.html' %}
+
+{% block title %}{{ event.title }} — Афиша{% endblock %}
+
+{% block content %}
+<div class="card">
+    <span class="badge">{{ event.category.name }}</span>
+    <h2 style="margin-top: 10px;">{{ event.title }}</h2>
+    
+    <div class="meta">
+        <p><strong>Дата и время:</strong> {{ event.date_time|date:"d.m.Y H:i" }}</p>
+        <p><strong>Место проведения:</strong> {{ event.location }}</p>
+        <p><strong>Стоимость:</strong> 
+            <span class="price">
+                {% if event.price == 0 %}Бесплатно{% else %}{{ event.price }} ₸{% endif %}
+            </span>
+        </p>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #dee2e6; margin: 16px 0;">
+    <p>{{ event.description|linebreaks }}</p>
+
+    <div style="margin-top: 24px;">
+        <a href="{% url 'event_list' %}" class="btn btn-secondary">← Вернуться к списку</a>
+    </div>
+</div>
+{% endblock %}
